@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -20,13 +21,13 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class testRest {
     static String uri = "http://ui.test.service.co";
 
-    @Test
-    public void shouldBe200() {
-        final String uri = "http://ui.test.service.co";
-        final RequestSpecification basicAuth = given().auth().preemptive().basic("User", "PWD");
-        final Response response = basicAuth.accept(ContentType.JSON).get(uri);
-        org.junit.Assert.assertThat(response.getStatusCode(), Matchers.equalTo(200));
-    }
+//    @Test
+//    public void shouldBe200() {
+//        final String uri = "http://ui.test.service.co";
+//        final RequestSpecification basicAuth = given().auth().preemptive().basic("User", "PWD");
+//        final Response response = basicAuth.accept(ContentType.JSON).get(uri);
+//        org.junit.Assert.assertThat(response.getStatusCode(), Matchers.equalTo(200));
+//    }
 
     @Test
     public void shouldUploadNewFile() {
@@ -61,10 +62,11 @@ public class testRest {
                 .baseUri(uri)
                 .contentType("application/json")
                 .body(myJson).log().all()
-                .when().post("/api/v1/media")
-                .then().log().all().statusCode(200)
-                .body("error_code", equalTo(0))
-                .body("status", equalTo("OK"));
+                .expect()
+                        .body("error_code", equalTo(1))
+                        .body("status", equalTo("-OK"))
+                        .when().post("/api/v1/media")
+                        .then().log().all().statusCode(200);
 
     }
 
