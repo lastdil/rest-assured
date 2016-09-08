@@ -11,8 +11,9 @@ public class authTest {
 
     @Test
     public void shouldDropService() {
-
-        for (int i = 0; i < 100; i++) {
+        int i = 1;
+        while (i < 300) {
+            System.out.println("Trying Number:" + i);
             String MyJson = "{\n" +
                     "  \"request_type\": \"phone_authorize\",\n" +
                     "  \"phone_number\": \"+12331233333\",\n" +
