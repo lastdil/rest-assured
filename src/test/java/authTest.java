@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 
 /**
- * Created by kate on 08/09/16.
+ * Created by ivan on 08/09/16.
  */
 public class authTest {
     private static String uri = "http://ui.test.service.co";
