@@ -1,17 +1,9 @@
-
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-
 
 import java.io.File;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -20,6 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 public class testRest {
     static String uri = "http://ui.test.service.co";
+    String myJson = "";
 
 //    @Test
 //    public void shouldBe200() {
@@ -63,10 +56,10 @@ public class testRest {
                 .contentType("application/json")
                 .body(myJson).log().all()
                 .expect()
-                        .body("error_code", equalTo(1))
-                        .body("status", equalTo("-OK"))
-                        .when().post("/api/v1/media")
-                        .then().log().all().statusCode(200);
+                .body("error_code", equalTo(0))
+                .body("status", equalTo("OK"))
+                .when().post("/api/v1/media")
+                .then().log().all().statusCode(200);
 
     }
 

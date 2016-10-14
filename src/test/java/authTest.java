@@ -10,7 +10,7 @@ public class authTest {
 
 
     @Test
-    public void shouldDropService() {
+    public void shouldDropAuthService() {
         int i = 1;
         while (i < 300) {
             System.out.println("Trying Number:" + i);
@@ -27,6 +27,31 @@ public class authTest {
                     .then().log().all().statusCode(200);
             i++;
 
+        }
+    }
+    @Test
+    public void shouldDropMediaService(){
+        int i = 1;
+        while (i < 1000){
+            System.out.println("Trying Number:" + i);
+            String mediaJson = "{\n" +
+                    "  \"request_type\": \"add\",\n" +
+                    "  \"albums\": [\n" +
+                    "    {\n" +
+                    "      \"album_id\": 1,\n" +
+                    "      \"type_id\": 2,\n" +
+                    "      \"title\": \"test11\"\n" +
+                    "    }\n" +
+                    "  ],\n" +
+                    "  \"token\": \"4A3830EE58E2465EA6232C212B8D0131\"\n" +
+                    "}";
+            given()
+                    .baseUri(uri)
+                    .contentType("application/json")
+                    .body(mediaJson).log().all()
+                    .when().post("api/v1/media")
+                    .then().log().all().statusCode(200);
+            i++;
         }
     }
 }
